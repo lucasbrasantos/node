@@ -198,15 +198,15 @@ ALTER TABLE	`bd_tcc_etim_121_g2`.`forum_interactions` AUTO_INCREMENT = 1;
 
 
 -- 
--- users
--- interests
--- user_interests
--- posts
--- comment
--- forum
--- forum_interactions
--- friends
--- chats
+-- 1 users
+-- 2 interests
+-- 3 user_interests
+-- 4 posts
+-- 5 comment
+-- 6 forum
+-- 7 forum_interactions
+-- 8 friends
+-- 9 chats
 -- 
 
 
