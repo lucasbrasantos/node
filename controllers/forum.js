@@ -7,7 +7,9 @@ module.exports = {
 
     async listarForum (request, response) {
         try {
-            return response.status(200).json({confirma: 'listar forum'});
+            const sql = "SELECT  `forumid`, `userid`, `title`, `description`, `tag`, `likes`, `created_at`, `moderator_status` FROM `bd_tcc_etim_121_g2`.`forum`;";
+            const forum = await db.query(sql);
+            return response.status(200).json(forum[0]);
         } catch (error) {
             return response.status(500).json({confirma: 'Erro', message: error});
         }

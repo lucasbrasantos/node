@@ -5,11 +5,12 @@ const db = require('../database/connection');
 
 module.exports = {
 
-    async listarInterests (request, response) {
+    async listarInterests (req, res) {
         try {
-            const q = 'select * from users'
+            const q = 'select * from interests'
             const data = await db.query(q)
-            response.json(data[0])
+            return res.json(data[0])
+
         } catch (error) {
             return response.status(500).json({confirma: 'Erro', message: error});
         }
