@@ -5,34 +5,35 @@ const db = require('../database/connection');
 
 module.exports = {
 
-    async listarChats(request, response) {
+    async listarChats(req, res) {
         try {
-            const sql = 'SELECT	`message`, `time_stamp`, `userid_senderid`, `userid_receiverid` FROM `bd_tcc_etim_121_g2`.`chats`;';
-            const chats = await db.query(sql);
-            return response.status(200).json(chats[0]);
+            const q = 'SELECT	`message`, `time_stamp`, `userid_senderid`, `userid_receiverid` FROM `bd_tcc_etim_121_g2`.`chats`;';
+            const data = await db.query(q);
+            return res.status(200).json(data[0]);
+            
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     },
-    async cadastrarChats(request, response) {
+    async cadastrarChats(req, res) {
         try {
-            return response.status(200).json({confirma: 'cadastrar chats'});
+            return res.status(200).json({confirma: 'cadastrar chats'});
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     },
-    async editarChats(request, response) {
+    async editarChats(req, res) {
         try {
-            return response.status(200).json({confirma: 'editar chats'});
+            return res.status(200).json({confirma: 'editar chats'});
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     },
-    async apagarChats(request, response) {
+    async apagarChats(req, res) {
         try {
-            return response.status(200).json({confirma: 'apagar chats'});
+            return res.status(200).json({confirma: 'apagar chats'});
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     }
 }

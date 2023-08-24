@@ -7,33 +7,33 @@ module.exports = {
 
     async listarInterests (req, res) {
         try {
-            const q = 'select * from interests'
-            const data = await db.query(q)
-            return res.json(data[0])
+            const q = 'SELECT  `interestsid`, `description` FROM `bd_tcc_etim_121_g2`.`interests`;';
+            const data = await db.query(q);
+            return res.status(200).json(data[0]);
 
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     },
-    async cadastrarInterests (request, response) {
+    async cadastrarInterests (req, res) {
         try {
-            return response.status(200).json({confirma: 'cadastrar interests'});
+            return res.status(200).json({confirma: 'cadastrar interests'});
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     },
-    async editarInterests (request, response) {
+    async editarInterests (req, res) {
         try {
-            return response.status(200).json({confirma: 'editar interests'});
+            return res.status(200).json({confirma: 'editar interests'});
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     },
-    async apagarInterests (request, response) {
+    async apagarInterests (req, res) {
         try {
-            return response.status(200).json({confirma: 'apagar interests'});
+            return res.status(200).json({confirma: 'apagar interests'});
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     }
 }

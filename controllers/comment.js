@@ -5,34 +5,35 @@ const db = require('../database/connection');
 
 module.exports = {
 
-    async listarComment (request, response) {
+    async listarComment (req, res) {
         try {
-            const sql = 'SELECT  `userid`, `postid`, `timecommented`, `comment`, `moderator_status` FROM `bd_tcc_etim_121_g2`.`comment`;';
-            const comment = await db.query(sql);
-            return response.status(200).json(comment[0]);
+            const q = 'SELECT  `userid`, `postid`, `timecommented`, `comment`, `moderator_status` FROM `bd_tcc_etim_121_g2`.`comment`;';
+            const data = await db.query(q);
+            return res.status(200).json(data[0]);
+            
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     },
-    async cadastrarComment (request, response) {
+    async cadastrarComment (req, res) {
         try {
-            return response.status(200).json({confirma: 'cadastrar comment'});
+            return res.status(200).json({confirma: 'cadastrar comment'});
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     },
-    async editarComment (request, response) {
+    async editarComment (req, res) {
         try {
-            return response.status(200).json({confirma: 'editar comment'});
+            return res.status(200).json({confirma: 'editar comment'});
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     },
-    async apagarComment (request, response) {
+    async apagarComment (req, res) {
         try {
-            return response.status(200).json({confirma: 'apagar comment'});
+            return res.status(200).json({confirma: 'apagar comment'});
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     }
 }

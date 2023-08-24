@@ -5,34 +5,35 @@ const db = require('../database/connection');
 
 module.exports = {
 
-    async listarForum_interactions (request, response) {
+    async listarForum_interactions (req, res) {
         try {
-            const sql = "SELECT  `interactionid`, `userid`, `forumid`, `content`, `photourl`, `likes`, `created_at`, `moderator_status` FROM `bd_tcc_etim_121_g2`.`forum_interactions`;";
-            const forumInterac = await db.query(sql);
-            return response.status(200).json(forumInterac[0]);
+            const q = "SELECT  `interactionid`, `userid`, `forumid`, `content`, `photourl`, `likes`, `created_at`, `moderator_status` FROM `bd_tcc_etim_121_g2`.`forum_interactions`;";
+            const data = await db.query(q);
+            return res.status(200).json(data[0]);
+            
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     },
-    async cadastrarForum_interactions (request, response) {
+    async cadastrarForum_interactions (req, res) {
         try {
-            return response.status(200).json({confirma: 'cadastrar forum interactions'});
+            return res.status(200).json({confirma: 'cadastrar forum interactions'});
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     },
-    async editarForum_interactions (request, response) {
+    async editarForum_interactions (req, res) {
         try {
-            return response.status(200).json({confirma: 'editar forum interactions'});
+            return res.status(200).json({confirma: 'editar forum interactions'});
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     },
-    async apagarForum_interactions (request, response) {
+    async apagarForum_interactions (req, res) {
         try {
-            return response.status(200).json({confirma: 'apagar forum interactions'});
+            return res.status(200).json({confirma: 'apagar forum interactions'});
         } catch (error) {
-            return response.status(500).json({confirma: 'Erro', message: error});
+            return res.status(500).json({confirma: 'Erro', message: error});
         }
     }
 }
