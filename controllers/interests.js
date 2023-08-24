@@ -7,7 +7,9 @@ module.exports = {
 
     async listarInterests (request, response) {
         try {
-            return response.status(200).json({confirma: 'listar interests'});
+            const q = 'select * from users'
+            const data = await db.query(q)
+            response.json(data[0])
         } catch (error) {
             return response.status(500).json({confirma: 'Erro', message: error});
         }
