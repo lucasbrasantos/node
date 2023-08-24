@@ -7,7 +7,9 @@ module.exports = {
 
     async listarChats(request, response) {
         try {
-            return response.status(200).json({confirma: 'Listar chats'});
+            const sql = 'SELECT	`message`, `time_stamp`, `userid_senderid`, `userid_receiverid` FROM `bd_tcc_etim_121_g2`.`chats`;';
+            const chats = await db.query(sql);
+            return response.status(200).json(chats[0]);
         } catch (error) {
             return response.status(500).json({confirma: 'Erro', message: error});
         }

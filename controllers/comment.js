@@ -7,7 +7,9 @@ module.exports = {
 
     async listarComment (request, response) {
         try {
-            return response.status(200).json({confirma: 'listar comment'});
+            const sql = 'SELECT  `userid`, `postid`, `timecommented`, `comment`, `moderator_status` FROM `bd_tcc_etim_121_g2`.`comment`;';
+            const comment = await db.query(sql);
+            return response.status(200).json(comment[0]);
         } catch (error) {
             return response.status(500).json({confirma: 'Erro', message: error});
         }
