@@ -11,7 +11,7 @@ app.use(router);
 const port = 3000
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Chamou conexão com api')
 })
 
 app.listen(port, () => {
