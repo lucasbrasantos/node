@@ -17,7 +17,20 @@ module.exports = {
     },
     async cadastrarUsers (req, res) {
         try {
-            return res.status(200).json({confirma: 'cadastrar users'});
+            const q = 'insert into `users` (`username`, `name`, `email`, `photourl`, `points`, `timecreated`) values (?)'
+            
+            const values = [
+                req.body.username,
+                req.body.name,
+                req.body.email,
+                req.body.photourl,
+                req.body.points,
+                req.body.timecreated,
+            ]
+
+            const data = await db.query(q, [values])
+            return res.status(200).json(`inserido com sucesso id:${data[0].insertId}`);
+
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }

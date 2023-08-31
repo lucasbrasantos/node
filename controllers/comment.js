@@ -17,7 +17,20 @@ module.exports = {
     },
     async cadastrarComment (req, res) {
         try {
-            return res.status(200).json({confirma: 'cadastrar comment'});
+            
+            const q = 'insert into `comment` (`userid`, `postid`, `timecommented`, `comment`, `moderator_status`) values (?)'
+            
+            const values = [
+                req.body.userid,
+                req.body.postid,
+                req.body.timecommented,
+                req.body.comment,
+                req.body.moderator_status,
+            ]
+
+            const data = await db.query(q, [values])
+            return res.status(200).json(`inserido com sucesso id:${data[0].insertId}`);
+
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }

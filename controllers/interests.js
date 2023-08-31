@@ -17,7 +17,16 @@ module.exports = {
     },
     async cadastrarInterests (req, res) {
         try {
-            return res.status(200).json({confirma: 'cadastrar interests'});
+            const q = 'insert into `interests` (`interestsid`, `description`) values (?)'
+            
+            const values = [
+                req.body.interestsid,
+                req.body.description,
+            ]
+
+            const data = await db.query(q, [values])
+            return res.status(200).json(`inserido com sucesso id:${data[0].insertId}`);
+
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }

@@ -17,7 +17,22 @@ module.exports = {
     },
     async cadastrarForum (req, res) {
         try {
-            return res.status(200).json({confirma: 'cadastrar forum'});
+            const q = 'insert into `forum` (`forumid`, `userid`, `title`, `description`, `tag`, `likes`, `created_at`, `moderator_status`) values (?)'
+            
+            const values = [
+                req.body.forumid,
+                req.body.userid,
+                req.body.title,
+                req.body.description,
+                req.body.tag,
+                req.body.likes,
+                req.body.created_at,
+                req.body.moderator_status,
+            ]
+
+            const data = await db.query(q, [values])
+            return res.status(200).json(`inserido com sucesso id:${data[0].insertId}`);
+            
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }

@@ -17,7 +17,18 @@ module.exports = {
     },
     async cadastrarChats(req, res) {
         try {
-            return res.status(200).json({confirma: 'cadastrar chats'});
+            const q = 'insert into `chats` (`message`, `time_stamp`, `userid_senderid`, `userid_receiverid`) values (?)'
+            
+            const values = [
+                req.body.message,
+                req.body.time_stamp,
+                req.body.userid_senderid,
+                req.body.userid_receiverid,
+            ]
+
+            const data = await db.query(q, [values])
+            return res.status(200).json(`inserido com sucesso id:${data[0].insertId}`);
+
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }

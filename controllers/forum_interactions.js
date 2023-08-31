@@ -17,7 +17,23 @@ module.exports = {
     },
     async cadastrarForum_interactions (req, res) {
         try {
-            return res.status(200).json({confirma: 'cadastrar forum interactions'});
+            
+            const q = 'insert into `forum_interactions` (`interactionid`, `userid`, `forumid`, `content`, `photourl`, `likes`, `created_at`, `moderator_status`) values (?)'
+            
+            const values = [
+                req.body.interactionid,
+                req.body.userid,
+                req.body.forumid,
+                req.body.content,
+                req.body.photourl,
+                req.body.likes,
+                req.body.created_at,
+                req.body.moderator_status,
+            ]
+
+            const data = await db.query(q, [values])
+            return res.status(200).json(`inserido com sucesso id:${data[0].insertId}`);
+
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }
