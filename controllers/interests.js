@@ -33,7 +33,15 @@ module.exports = {
     },
     async editarInterests (req, res) {
         try {
-            return res.status(200).json({confirma: 'editar interests'});
+            const id = req.params.interestsid;
+            const q = 'update `interests` set `description`=? where `interestsid`=?'
+            
+            const values = [
+                req.body.description,
+            ]
+
+            const data = await db.query(q, [...values, id]);
+            return res.status(200).json('affected rows: '+ data[0].affectedRows);
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }

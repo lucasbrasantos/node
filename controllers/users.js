@@ -37,7 +37,20 @@ module.exports = {
     },
     async editarUsers (req, res) {
         try {
-            return res.status(200).json({confirma: 'editar users'});
+            const id = req.params.userid;
+            const q = 'update `users` set `username`= ?, `name`=?, `email`=?, `photourl`=?, `points`=?, `timecreated`=? where `userid`=?'
+            
+            const values = [
+                req.body.username,
+                req.body.name,
+                req.body.email,
+                req.body.photourl,
+                req.body.points,
+                req.body.timecreated,
+            ]
+
+            const data = await db.query(q, [...values, id]);
+            return res.status(200).json('affected rows: '+ data[0].affectedRows);
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }

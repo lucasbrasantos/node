@@ -39,7 +39,20 @@ module.exports = {
     },
     async editarForum (req, res) {
         try {
-            return res.status(200).json({confirma: 'editar forum'});
+            const id = req.params.forumid;
+            const q = 'update `forum` set `title`=?, `description`=?, `tag`=?, `likes`=?, `created_at`=?, `moderator_status`=? where `forumid`=?'
+            
+            const values = [
+                req.body.title,
+                req.body.description,
+                req.body.tag,
+                req.body.likes,
+                req.body.created_at,
+                req.body.moderator_status,
+            ]
+
+            const data = await db.query(q, [...values, id]);
+            return res.status(200).json('affected rows: '+ data[0].affectedRows);
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }

@@ -7,7 +7,7 @@ module.exports = {
 
     async listarChats(req, res) {
         try {
-            const q = 'SELECT	`message`, `time_stamp`, `userid_senderid`, `userid_receiverid` FROM `bd_tcc_etim_121_g2`.`chats`;';
+            const q = 'SELECT	`chatid`, `message`, `time_stamp`, `userid_senderid`, `userid_receiverid` FROM `bd_tcc_etim_121_g2`.`chats`;';
             const data = await db.query(q);
             return res.status(200).json(data[0]);
             
@@ -35,7 +35,20 @@ module.exports = {
     },
     async editarChats(req, res) {
         try {
-            return res.status(200).json({confirma: 'editar chats'});
+            
+            const id = req.params.chatid;
+            const q = 'update `chats` set `message`=?, `time_stamp`=?, `userid_senderid`=?, `userid_receiverid`=? where chatid=?'
+            
+            const values = [
+                req.body.message,
+                req.body.time_stamp,
+                req.body.userid_senderid,
+                req.body.userid_receiverid,
+            ]
+
+            const data = await db.query(q, [...values, id]);
+            return res.status(200).json('affected rows: '+ data[0].affectedRows);
+
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }

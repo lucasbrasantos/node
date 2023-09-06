@@ -39,7 +39,21 @@ module.exports = {
     },
     async editarPosts (req, res) {
         try {
-            return res.status(200).json({confirma: 'editar posts'});
+            const id = req.params.postid;
+            const q = 'update `posts` set `title`= ?, `photourl`= ?, `timeposted`= ?, `likes`= ?, `userid`= ?, `tag`= ?, `moderator_status`= ? where postid = ?'
+            
+            const values = [
+                req.body.title,
+                req.body.photourl,
+                req.body.timeposted,
+                req.body.likes,
+                req.body.userid,
+                req.body.tag,
+                req.body.moderator_status,
+            ]
+
+            const data = await db.query(q, [...values, id])
+            return res.status(200).json('affected rows: '+ data[0].affectedRows);
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }
