@@ -19,14 +19,14 @@ const ChatsController = require('../controllers/chats.js');
 router.get('/users', UsersController.listarUsers);
 router.post('/users', UsersController.cadastrarUsers);
 router.patch('/users/:userid', UsersController.editarUsers);
-router.delete('/users', UsersController.apagarUsers);
+router.delete('/users/:userid', UsersController.apagarUsers);
 
 
 
 router.get('/interests', InterestsController.listarInterests);
 router.post('/interests', InterestsController.cadastrarInterests);
 router.patch('/interests/:interestsid', InterestsController.editarInterests);
-router.delete('/interests', InterestsController.apagarInterests);
+router.delete('/interests/:interestsid', InterestsController.apagarInterests);
 
 
 
@@ -40,26 +40,26 @@ router.delete('/user_interests', User_interestsController.apagarUser_interests);
 router.get('/posts', PostsController.listarPosts);
 router.post('/posts', PostsController.cadastrarPosts);
 router.patch('/posts/:postid', PostsController.editarPosts);
-router.delete('/posts', PostsController.apagarPosts);
+router.delete('/posts/:postid', PostsController.apagarPosts);
 
 
 
 router.get('/comment', CommentController.listarComment);
 router.post('/comment', CommentController.cadastrarComment);
 router.patch('/comment/:commentid', CommentController.editarComment);
-router.delete('/comment', CommentController.apagarComment);
+router.delete('/comment/:commentid', CommentController.apagarComment);
 
 
 router.get('/forum', ForumController.listarForum);
 router.post('/forum', ForumController.cadastrarForum);
 router.patch('/forum/:forumid', ForumController.editarForum);
-router.delete('/forum', ForumController.apagarForum);
+router.delete('/forum/:forumid', ForumController.apagarForum);
 
 
 router.get('/forum_interactions', Forum_interactionsController.listarForum_interactions);
 router.post('/forum_interactions', Forum_interactionsController.cadastrarForum_interactions);
 router.patch('/forum_interactions/:interactionid', Forum_interactionsController.editarForum_interactions);
-router.delete('/forum_interactions', Forum_interactionsController.apagarForum_interactions);
+router.delete('/forum_interactions/:interactionid', Forum_interactionsController.apagarForum_interactions);
 
 
 router.get('/friends', FriendsController.listarFriends);
@@ -71,7 +71,7 @@ router.delete('/friends', FriendsController.apagarFriends);
 router.get('/chats', ChatsController.listarChats);
 router.post('/chats', ChatsController.cadastrarChats);
 router.patch('/chats/:chatid', ChatsController.editarChats);
-router.delete('/chats', ChatsController.apagarChats);
+router.delete('/chats/:chatid', ChatsController.apagarChats);
 
 
 
