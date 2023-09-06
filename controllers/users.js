@@ -57,7 +57,12 @@ module.exports = {
     },
     async apagarUsers (req, res) {
         try {
-            return res.status(200).json({confirma: 'apagar users'});
+            const id = req.params.userid;
+            const q = 'delete from `users` where `userid`=?'            
+
+            const data = await db.query(q, id);
+            return res.status(200).json('affected rows: '+ data[0].affectedRows);
+
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }

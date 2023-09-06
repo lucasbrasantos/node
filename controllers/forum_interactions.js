@@ -62,7 +62,11 @@ module.exports = {
     },
     async apagarForum_interactions (req, res) {
         try {
-            return res.status(200).json({confirma: 'apagar forum interactions'});
+            const id = req.params.interactionid;
+            const q = 'delete from `forum_interactions` where `interactionid`=?'            
+
+            const data = await db.query(q, id);
+            return res.status(200).json('affected rows: '+ data[0].affectedRows);
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }

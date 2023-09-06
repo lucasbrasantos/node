@@ -48,7 +48,11 @@ module.exports = {
     },
     async apagarInterests (req, res) {
         try {
-            return res.status(200).json({confirma: 'apagar interests'});
+            const id = req.params.interestsid;
+            const q = 'delete from `interests` where `interestsid`=?'            
+
+            const data = await db.query(q, id);
+            return res.status(200).json('affected rows: '+ data[0].affectedRows);
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }

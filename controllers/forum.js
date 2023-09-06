@@ -59,7 +59,11 @@ module.exports = {
     },
     async apagarForum (req, res) {
         try {
-            return res.status(200).json({confirma: 'apagar forum'});
+            const id = req.params.forumid;
+            const q = 'delete from `forum` where `forumid`=?'            
+
+            const data = await db.query(q, id);
+            return res.status(200).json('affected rows: '+ data[0].affectedRows);
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }

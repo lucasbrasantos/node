@@ -60,7 +60,11 @@ module.exports = {
     },
     async apagarPosts (req, res) {
         try {
-            return res.status(200).json({confirma: 'apagar posts'});
+            const id = req.params.postid;
+            const q = 'delete from `posts` where `postid`=?'            
+
+            const data = await db.query(q, id);
+            return res.status(200).json('affected rows: '+ data[0].affectedRows);
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }

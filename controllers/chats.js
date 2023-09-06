@@ -55,7 +55,11 @@ module.exports = {
     },
     async apagarChats(req, res) {
         try {
-            return res.status(200).json({confirma: 'apagar chats'});
+            const id = req.params.chatid;
+            const q = 'delete from `chats` where `chatid`=?'            
+
+            const data = await db.query(q, id);
+            return res.status(200).json('affected rows: '+ data[0].affectedRows);
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }
