@@ -10,7 +10,7 @@ module.exports = {
             const limit = parseInt(req.query.limit)  // limit param in req
             const hasLimit = !isNaN(limit) && limit > 0 // if has the limit param
 
-            const baseQ = 'SELECT	`userid`, `username`, `name`, `email`, `photourl`, `points`, `timecreated` FROM `bd_tcc_etim_121_g2`.`users`'
+            const baseQ = 'SELECT	`userid`, `username`, `name`, `email`, `photourl`, `points`, `timecreated`, `firebase`, `description` FROM `bd_tcc_etim_121_g2`.`users`'
             const limitQ = `${baseQ} ORDER BY \`points\` DESC LIMIT ?;`
             
             const q = hasLimit ? limitQ : baseQ // if has limit param the query is with limit, if not the query is not with limit
@@ -23,7 +23,7 @@ module.exports = {
     },
     async cadastrarUsers (req, res) {
         try {
-            const q = 'insert into `users` (`username`, `name`, `email`, `photourl`, `points`, `timecreated`) values (?)'
+            const q = 'insert into `users` (`username`, `name`, `email`, `photourl`, `points`, `timecreated`, `firebase`, `description`) values (?)'
             
             const values = [
                 req.body.username,
@@ -32,6 +32,8 @@ module.exports = {
                 req.body.photourl,
                 req.body.points,
                 req.body.timecreated,
+                req.body.firebase,
+                req.body.description,
             ]
 
             const data = await db.query(q, [values])
@@ -44,7 +46,7 @@ module.exports = {
     async editarUsers (req, res) {
         try {
             const id = req.params.userid;
-            const q = 'update `users` set `username`= ?, `name`=?, `email`=?, `photourl`=?, `points`=?, `timecreated`=? where `userid`=?'
+            const q = 'update `users` set `username`= ?, `name`=?, `email`=?, `photourl`=?, `points`=?, `timecreated`=?, `firebase`=?, `description`=? where `userid`=?'
             
             const values = [
                 req.body.username,
@@ -53,6 +55,8 @@ module.exports = {
                 req.body.photourl,
                 req.body.points,
                 req.body.timecreated,
+                req.body.firebase,
+                req.body.description,
             ]
 
             const data = await db.query(q, [...values, id]);
