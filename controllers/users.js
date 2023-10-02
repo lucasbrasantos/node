@@ -5,6 +5,19 @@ const db = require('../database/connection');
 
 module.exports = {
 
+    async pegarUserPeloUid (req, res) {
+        try {
+            const userUid = req.query.uid
+            const q = 'SELECT	`userid`, `username`, `name`, `email`, `photourl`, `points`, `timecreated`, `firebase`, `description` FROM `bd_tcc_etim_121_g2`.`users` where `firebase`= ?'
+            
+            const data = await db.query(q, [userUid]);
+            return res.status(200).json(data[0]);
+            
+        } catch (error) {
+            return res.status(500).json({confirma: 'Erro', message: error});
+        }
+    },
+
     async listarUsers (req, res) {
         try {
             const limit = parseInt(req.query.limit)  // limit param in req
