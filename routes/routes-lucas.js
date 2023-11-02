@@ -41,6 +41,7 @@ router.delete('/user_interests', User_interestsController.apagarUser_interests);
 router.get('/posts', PostsController.listarPosts);
 router.post('/posts', PostsController.cadastrarPosts);
 router.patch('/posts/:postid', PostsController.editarPosts);
+router.patch('/like_post/:postid', PostsController.likePost);
 router.delete('/posts/:postid', PostsController.apagarPosts);
 
 
