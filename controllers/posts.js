@@ -58,6 +58,20 @@ module.exports = {
             return res.status(500).json({confirma: 'Erro', message: error});
         }
     },
+    async likePost (req, res) {
+        try {
+            const id = req.params.postid;
+            const newLikes = req.body.likes
+            const q = 'update `posts` set `likes`= ? where postid = ?'
+
+
+            const data = await db.query(q, [newLikes, id])
+
+            return res.status(200).json('affected rows: '+ data[0].affectedRows);
+        } catch (error) {
+            return res.status(500).json({confirma: 'Erro', message: error});
+        }
+    },
     async apagarPosts (req, res) {
         try {
             const id = req.params.postid;
