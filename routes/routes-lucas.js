@@ -39,6 +39,7 @@ router.delete('/user_interests', User_interestsController.apagarUser_interests);
 
 
 router.get('/posts', PostsController.listarPosts);
+router.get('/post_likes/:postid', PostsController.listarPostLikes);
 router.post('/posts', PostsController.cadastrarPosts);
 router.patch('/posts/:postid', PostsController.editarPosts);
 router.patch('/like_post/:postid', PostsController.likePost);
@@ -53,8 +54,10 @@ router.delete('/comment/:commentid', CommentController.apagarComment);
 
 
 router.get('/forum', ForumController.listarForum);
+router.get('/forum_likes/:forumid', ForumController.listarForumLikes);
 router.post('/forum', ForumController.cadastrarForum);
 router.patch('/forum/:forumid', ForumController.editarForum);
+router.patch('/like_forum/:forumid', ForumController.likeForum);
 router.delete('/forum/:forumid', ForumController.apagarForum);
 
 

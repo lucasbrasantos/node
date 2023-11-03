@@ -5,6 +5,18 @@ const db = require('../database/connection');
 
 module.exports = {
 
+    async listarPostLikes (req, res) {
+        try {
+            const postId = req.params.postid
+            const q = "SELECT `likes` FROM `bd_tcc_etim_121_g2`.`posts` where `postid`=?;";
+            
+            const data = await db.query(q, [postId]);
+            return res.status(200).json(data[0]);
+            
+        } catch (error) {
+            return res.status(500).json({confirma: 'Erro', message: error});
+        }
+    },
     async listarPosts (req, res) {
         try {
             const q = 'SELECT	`postid`, `title`, `photourl`, `timeposted`, `likes`, `userid`, `tag`, `moderator_status` FROM `bd_tcc_etim_121_g2`.`posts`;';
