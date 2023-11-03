@@ -17,6 +17,7 @@ const FriendsController = require('../controllers/friends.js');
 const ChatsController = require('../controllers/chats.js');
 
 router.get('/user_uid', UsersController.pegarUserPeloUid);
+router.get('/user_id', UsersController.pegarUserPeloId);
 router.get('/users', UsersController.listarUsers);
 router.post('/users', UsersController.cadastrarUsers);
 router.patch('/users/:userid', UsersController.editarUsers);

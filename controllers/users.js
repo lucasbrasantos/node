@@ -17,6 +17,18 @@ module.exports = {
             return res.status(500).json({confirma: 'Erro', message: error});
         }
     },
+    async pegarUserPeloId (req, res) {
+        try {
+            const userId = req.query.id
+            const q = 'SELECT	`userid`, `username`, `name`, `email`, `photourl`, `points`, `timecreated`, `firebase`, `description` FROM `bd_tcc_etim_121_g2`.`users` where `userid`= ?'
+            
+            const data = await db.query(q, [userId]);
+            return res.status(200).json(data[0]);
+            
+        } catch (error) {
+            return res.status(500).json({confirma: 'Erro', message: error});
+        }
+    },
 
     async listarUsers (req, res) {
         try {
