@@ -5,6 +5,18 @@ const db = require('../database/connection');
 
 module.exports = {
 
+    async listarFriendsWhere (req, res) {
+        try {
+            const userId = req.params.id
+            const q = 'SELECT	`userid`, `useridfriend` FROM `bd_tcc_etim_121_g2`.`friends` where `userid`=?;';
+            
+            const data = await db.query(q, [userId]);
+            return res.status(200).json(data[0]);
+            
+        } catch (error) {
+            return res.status(500).json({confirma: 'Erro', message: error});
+        }
+    },
     async listarFriends (req, res) {
         try {
             const q = 'SELECT	`userid`, `useridfriend` FROM `bd_tcc_etim_121_g2`.`friends`;';

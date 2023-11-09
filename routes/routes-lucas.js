@@ -68,6 +68,8 @@ router.patch('/forum_interactions/:interactionid', Forum_interactionsController.
 router.delete('/forum_interactions/:interactionid', Forum_interactionsController.apagarForum_interactions);
 
 
+
+router.get('/friendsUsrId/:id', FriendsController.listarFriendsWhere);
 router.get('/friends', FriendsController.listarFriends);
 router.post('/friends', FriendsController.cadastrarFriends);
 router.patch('/friends', FriendsController.editarFriends);
