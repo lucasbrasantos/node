@@ -5,6 +5,18 @@ const db = require('../database/connection');
 
 module.exports = {
 
+    async listarRanking (req, res) {
+        try {
+            const userId = req.query.id
+            const q = 'WITH UserRanking AS( SELECT `userid`, `name`, `points`, ROW_NUMBER() OVER (ORDER BY `points` DESC, `userid`) AS `user_ranking` FROM `bd_tcc_etim_121_g2`.`users`) SELECT `userid`, `name`, `points`, `user_ranking` FROM `UserRanking` WHERE `userid` = ? ORDER BY `user_ranking` ASC; '
+            
+            const data = await db.query(q, userId);
+            return res.status(200).json(data[0]);
+            
+        } catch (error) {
+            return res.status(500).json({confirma: 'Erro', message: error});
+        }
+    },
     async pegarUserPeloUid (req, res) {
         try {
             const userUid = req.query.uid
