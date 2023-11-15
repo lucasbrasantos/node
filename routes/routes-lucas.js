@@ -69,7 +69,7 @@ router.delete('/forum_interactions/:interactionid', Forum_interactionsController
 
 
 
-router.get('/friendsUsrId/:id', FriendsController.listarFriendsWhere);
+router.get('/friendsUsrId', FriendsController.listarFriendsWhere);
 router.get('/friends', FriendsController.listarFriends);
 router.post('/friends', FriendsController.cadastrarFriends);
 router.patch('/friends', FriendsController.editarFriends);
