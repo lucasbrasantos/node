@@ -16,6 +16,7 @@ const Forum_interactionsController = require('../controllers/forum_interactions.
 const FriendsController = require('../controllers/friends.js');
 const ChatsController = require('../controllers/chats.js');
 
+router.delete('/delete_user', UsersController.deleteUserAndRelatedData);
 router.get('/user_ranking', UsersController.listarRanking);
 router.get('/user_uid', UsersController.pegarUserPeloUid);
 router.get('/user_id', UsersController.pegarUserPeloId);

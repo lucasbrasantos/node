@@ -5,6 +5,26 @@ const db = require('../database/connection');
 
 module.exports = {
 
+    async deleteUserAndRelatedData (req, res) {
+        try {
+            const userId = req.query.id
+
+            await db.query('DELETE FROM comment WHERE postid IN (SELECT postid FROM posts WHERE userid = ?);', userId);
+            await db.query('DELETE FROM forum_interactions WHERE userid = ?;', userId);
+            await db.query('DELETE FROM posts WHERE userid = ?;', userId);
+            await db.query('DELETE FROM friends WHERE userid = ? OR useridfriend = ?;', [userId, userId]);
+            await db.query('DELETE FROM user_interests WHERE userid = ?;', userId);
+            await db.query('DELETE FROM forum WHERE userid = ?;', userId);
+            await db.query('DELETE FROM chats WHERE userid_senderid = ? OR userid_receiverid = ?;', [userId, userId]);
+            await db.query('DELETE FROM users WHERE userid = ?;', userId);
+
+            return res.status(200).json({ confirm: 'Success' });
+            
+            
+        } catch (error) {
+            return res.status(500).json({confirma: 'Erro', message: error});
+        }
+    },
     async listarRanking (req, res) {
         try {
             const userId = req.query.id
