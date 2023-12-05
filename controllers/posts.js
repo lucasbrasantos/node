@@ -86,7 +86,8 @@ module.exports = {
     },
     async apagarPosts (req, res) {
         try {
-            const id = req.params.postid;
+            const id = req.query.postid;
+
             const q = 'delete from `posts` where `postid`=?'            
 
             const data = await db.query(q, id);

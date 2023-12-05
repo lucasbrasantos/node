@@ -46,7 +46,7 @@ router.get('/post_likes/:postid', PostsController.listarPostLikes);
 router.post('/posts', PostsController.cadastrarPosts);
 router.patch('/posts/:postid', PostsController.editarPosts);
 router.patch('/like_post/:postid', PostsController.likePost);
-router.delete('/posts/:postid', PostsController.apagarPosts);
+router.delete('/posts', PostsController.apagarPosts);
 
 
 
