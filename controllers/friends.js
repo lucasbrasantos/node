@@ -13,7 +13,7 @@ module.exports = {
             // console.log(req.query);
 
             const q = 'SELECT `friends`.`userid`, `users`.`userid` as `useridfriend`, `users`.`name`, `users`.`username`, `users`.`photourl`, (SELECT COUNT(*) FROM `bd_tcc_etim_121_g2`.`friends` `f` WHERE `f`.`userid` = `users`.`userid`) AS num_friends FROM `bd_tcc_etim_121_g2`.`users` inner join `bd_tcc_etim_121_g2`.`friends` on `users`.`userid` = `friends`.`useridfriend` where `friends`.`userid` = ?';
-            const q2 = 'SELECT `friends`.`userid`, `users`.`userid` as `useridfriend`, `users`.`name`, `users`.`username`, `users`.`photourl`, (SELECT COUNT(*) FROM `bd_tcc_etim_121_g2`.`friends` `f` WHERE `f`.`userid` = `users`.`userid`) AS num_friends FROM `bd_tcc_etim_121_g2`.`users` left join `bd_tcc_etim_121_g2`.`friends` on `users`.`userid` = `friends`.`useridfriend` AND `friends`.`userid` = 17 where `friends`.`userid` IS null'
+            const q2 = 'SELECT `friends`.`userid`, `users`.`userid` as `useridfriend`, `users`.`name`, `users`.`username`, `users`.`photourl`, (SELECT COUNT(*) FROM `bd_tcc_etim_121_g2`.`friends` `f` WHERE `f`.`userid` = `users`.`userid`) AS num_friends FROM `bd_tcc_etim_121_g2`.`users` left join `bd_tcc_etim_121_g2`.`friends` on `users`.`userid` = `friends`.`useridfriend` AND `friends`.`userid` = ? where `friends`.`userid` IS null'
             
             const data = await db.query(queryType === 'isFriend' ? q : q2, [userId]);
             return res.status(200).json(data[0]);
@@ -57,7 +57,18 @@ module.exports = {
     },
     async apagarFriends (req, res) {
         try {
-            return res.status(200).json({confirma: 'apagar friends'});
+
+
+            const q = 'delete from `friends` where `userid` = ? and `useridfriend` = ?'
+            
+            const values = [
+                req.query.userid,
+                req.query.useridfriend,
+            ]
+
+            const data = await db.query(q, [...values])
+
+            return res.status(200).json({confirma: 'Amigo removido com sucesso'});
         } catch (error) {
             return res.status(500).json({confirma: 'Erro', message: error});
         }
